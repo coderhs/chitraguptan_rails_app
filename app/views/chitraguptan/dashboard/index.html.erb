@@ -1,0 +1,78 @@
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <style>
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+        }
+
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+        main > .container {
+          padding: 60px 15px 0;
+        }
+    </style>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Chitraguptan</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+
+            </ul>
+            <%= form_tag "/chitraguptan/dashboard", method: 'GET', class: 'd-flex' do %>
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search" name="search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+      <div class="container">
+        <h1 class="mt-5">Variables</h1>
+        <% @variables.each do |row| %>
+          <div class="row mb-3">
+            <% row.each do |column| %>
+              <div class="col-sm-6 themed-grid-col">
+                <%= form_for :variable, id: "variable_#{column[:key]}", class: "row g-3", method: :put, url:  chitraguptan_dashboard_path(id: column[:key]) do |form| %>
+                  <div class="col-md-5">
+                    <%= form.text_field :key, value: column[:key], class: 'form-control', readonly: true %>
+                  </div>
+                  <div class="col-md-5">
+                    <%= form.text_field :value, value: column[:value], class: 'form-control' %>
+                  </div>
+                  <div class="col-md-2">
+                    <%= form.submit 'Save', class: 'btn btn-success mb-3' %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </main>
+
+    <footer class="footer mt-auto py-3 bg-light">
+      <div class="container">
+        <span class="text-muted">MIT Lisence | https:://github.com/coderhs </span>
+      </div>
+    </footer>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>
