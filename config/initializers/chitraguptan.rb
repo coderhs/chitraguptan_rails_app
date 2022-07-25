@@ -1,0 +1,3 @@
+require 'chitraguptan'
+
+Chitraguptan.load

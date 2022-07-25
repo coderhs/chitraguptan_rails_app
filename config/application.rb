@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module DynamicRailsConfigApp
   class Application < Rails::Application
+    config.autoload_paths << "lib"
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
@@ -18,5 +20,6 @@ module DynamicRailsConfigApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
   end
 end

@@ -1,4 +1,4 @@
-# Project Chitragupta
+# Project Chitraguptan
 
 ## Project Plan
 
@@ -38,11 +38,11 @@ This project aim is to reduce this burden managing variables, this is especial u
 building feature simple feature toggles.
 
 ```rb
-  where('rssi < ?', Chitragupta.get("week_rssi", default: 100))
+  where('rssi < ?', Chitraguptan.get("week_rssi", default: 100))
 ```
 
-Now this variable will be set as `chitragupta:week_rssi` in your redis database and also
-stored in your database inside the table: chitragupta_variabels. The table has 3 fields
+Now this variable will be set as `chitraguptan:week_rssi` in your redis database and also
+stored in your database inside the table: chitraguptan_variabels. The table has 3 fields
 id, key, value  - (int 32, varchar, jsonb)
 
 ## Purpose of this repo
