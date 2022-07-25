@@ -19,6 +19,10 @@ module Chitraguptan
     load_object.get(key, default)
   end
 
+  class <<self
+    alias_method :set, :get
+  end
+
   def self.delete(key)
     load_object.get(key)
   end
