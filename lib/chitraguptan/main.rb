@@ -33,7 +33,7 @@ class Chitraguptan::Main
 
   def all
     all_keys.map do |key|
-      { key: key, value: parse_and_fetch(get_raw_key(key))}
+      { key: decode_key(key), value: parse_and_fetch(get_raw_key(key))}
     end
   end
 
@@ -44,6 +44,14 @@ class Chitraguptan::Main
   end
 
   private
+
+  def decode_key(key)
+    key.gsub("#{@config.prefix}:", '')
+  end
+
+  def encode_key(key)
+    "#{@config.prefix}:#{key}"
+  end
 
   def parse_value(value)
     JSON.parse(value)
@@ -64,7 +72,7 @@ class Chitraguptan::Main
   end
 
   def get_key(key)
-    get_raw_key("#{@config.prefix}:#{key}")
+    get_raw_key(encode_key(key))
   end
 
   def get_raw_key(raw_key)
@@ -74,11 +82,11 @@ class Chitraguptan::Main
   def set_key(key, default)
     raise Chitraguptan::Errors::NoDefault unless default
 
-    @config.redis.set("#{@config.prefix}:#{key}", { value: default }.to_json)
+    @config.redis.set(encode_key(key), { value: default }.to_json)
   end
 
   def del_key(key)
-    del_raw_key("#{@config.prefix}:#{key}")
+    del_raw_key(encode_key(key))
   end
 
   def del_raw_key(key)
