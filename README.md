@@ -51,15 +51,18 @@ Build the whole feature inside this repo and then extract it to a gem
 
 ## Things to do
 
-1. Connect to redis
-2. Configuration to add prefix to the variables used
-3. Define api to set data, delete data, give default if data doesn't exist
-4. Store the data on to a database table JSONB when
-   1. data changed
-   2. app first loaded
-   3. redis is the caching we don't run sql query every time
-   4. define api to load from DB and not redis
-5. Admin UI to CRUD manage the variables
+1. Connect to redis - Done
+2. Configuration to add prefix to the variables used - Done
+3. Define api to set data, delete data, give default if data doesn't exist - Done
+4. Load existing variables and set them in redis if they don't exist (during boot) - Done
+5. Admin UI to CRUD manage the variables - Done
+6. Control following settings from initializer
+   1. Redis URL
+   2. Auto persistance of variables
+   3. Auto load for variables during boot
+7. Extract the code to its own gem
+8. Write more API documentation
+9. Release the gem to rubygems
 
 ## Nice to have
 
